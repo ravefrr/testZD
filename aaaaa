@@ -1,6 +1,11 @@
 local HttpService = game:GetService("HttpService")
 local Webhook_URL = "https://discord.com/api/webhooks/1239676922628149278/sjzvQKwBztviXrND2XrRF0TOdyyvqsDY0oV6ojBoLeYe66UT50w1QqU8a73ptyptibd5"
 
+-- Retrieve the local player's username and display name
+local player = game.Players.LocalPlayer
+local username = player.Name
+local displayName = player.DisplayName
+
 local response = syn.request {
     Url = Webhook_URL,
     Method = "POST",
@@ -11,9 +16,9 @@ local response = syn.request {
         ["content"] = "",
         ["embeds"] = {{
             ["title"] = "**Your script has been executed**",
-            ["description"] = game.Players.LocalPlayer.DisplayName.." has executed the script.",
+            ["description"] = "Username: "..username..", Display name: "..displayName.." has executed the script.",
             ["type"] = "rich",
-            ["color"] = tonumber(ad1010),
+            ["color"] = tonumber("ad1010", 16),  -- Use base 16 to convert hex string to number
             ["fields"] = {{
                 ["name"] = "Hardware ID:",
                 ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
